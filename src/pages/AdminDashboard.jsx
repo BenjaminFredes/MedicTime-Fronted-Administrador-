@@ -87,7 +87,7 @@ export default function AdminDashboard() {
 
     if (!account) {
       console.warn("⚠️ [MSAL] No se encontró cuenta activa. Redirigiendo a inicio de sesión...");
-      window.location.href = 'http://localhost:3001/login';
+      window.location.href = 'https://benjaminfredes.github.io/MedicTime-Fronted/#/login';
       return null;
     }
 
@@ -103,7 +103,7 @@ export default function AdminDashboard() {
       console.warn("⚠️ [MSAL] acquireTokenSilent falló. Usando token almacenado...", e);
       if (urlOrStoredToken) return urlOrStoredToken;
 
-      window.location.href = 'http://localhost:3001/login';
+      window.location.href = 'https://benjaminfredes.github.io/MedicTime-Fronted/#/login';
       return null;
     }
   }, [instance, checkUrlToken]);

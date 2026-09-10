@@ -7,12 +7,13 @@ export default function Header() {
   const navigate = useNavigate();
   const { instance } = useMsal();
 
-  // Intentar obtener usuario de MSAL o del localStorage transferido
   const activeAccount = instance.getActiveAccount() || instance.getAllAccounts()[0];
   const storedUserData = JSON.parse(localStorage.getItem('userData') || '{}');
 
   const displayName = activeAccount?.name || storedUserData?.name || 'Administrador';
   const displayEmail = activeAccount?.username || storedUserData?.username || 'admin@medictime.cl';
+
+  const TARGET_LOGIN_URL = "https://benjaminfredes.github.io/MedicTime-Fronted/#/login";
 
   const handleLogout = async () => {
     console.log("🔐 Cerrando sesión...");
@@ -21,14 +22,14 @@ export default function Header() {
     localStorage.clear();
     sessionStorage.clear();
 
-    // 2. Destruir sesión en Microsoft Entra ID y regresar a 3001/login
+    // 2. Destruir sesión en MSAL y regresar al Login principal
     try {
       await instance.logoutRedirect({
-        postLogoutRedirectUri: 'http://localhost:3001/login',
+        postLogoutRedirectUri: TARGET_LOGIN_URL,
       });
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
-      window.location.href = 'http://localhost:3001/login';
+      window.location.href = TARGET_LOGIN_URL;
     }
   };
 
