@@ -1,6 +1,6 @@
 import { MOCK_MEDICOS } from '../data/mockMedicos';
 
-// URL Base Temporal para desarrollo local (Cambiar posteriormente por AWS API Gateway URL)
+// URL Base conectada a AWS API Gateway
 const API_URL = "https://190iqie7ue.execute-api.us-east-1.amazonaws.com";
 const USE_MOCK = false; // Cambiar a false para conectar con MS-Médicos
 
@@ -21,7 +21,7 @@ export const getMedicos = async (accessToken = null) => {
   const headers = { "Content-Type": "application/json" };
   if (accessToken) headers["Authorization"] = `Bearer ${accessToken}`;
 
-  const response = await fetch(`${API_URL}/medicos`, { headers });
+  const response = await fetch(`${API_URL}/api/medicos`, { headers });
   if (!response.ok) throw new Error("Error al obtener el listado de médicos");
   return await response.json();
 };
@@ -49,7 +49,7 @@ export const createMedico = async (medicoRequest, accessToken = null) => {
   const headers = { "Content-Type": "application/json" };
   if (accessToken) headers["Authorization"] = `Bearer ${accessToken}`;
 
-  const response = await fetch(`${API_URL}/medicos`, {
+  const response = await fetch(`${API_URL}/api/medicos`, {
     method: "POST",
     headers,
     body: JSON.stringify(medicoRequest)
@@ -82,7 +82,7 @@ export const updateMedico = async (id, medicoRequest, accessToken = null) => {
   const headers = { "Content-Type": "application/json" };
   if (accessToken) headers["Authorization"] = `Bearer ${accessToken}`;
 
-  const response = await fetch(`${API_URL}/medicos/${id}`, {
+  const response = await fetch(`${API_URL}/api/medicos/${id}`, {
     method: "PUT",
     headers,
     body: JSON.stringify(medicoRequest)
@@ -109,7 +109,7 @@ export const deleteMedico = async (id, accessToken = null) => {
   const headers = { "Content-Type": "application/json" };
   if (accessToken) headers["Authorization"] = `Bearer ${accessToken}`;
 
-  const response = await fetch(`${API_URL}/medicos/${id}`, {
+  const response = await fetch(`${API_URL}/api/medicos/${id}`, {
     method: "DELETE",
     headers
   });
