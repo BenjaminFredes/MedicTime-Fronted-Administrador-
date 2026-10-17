@@ -1,7 +1,7 @@
 import { MOCK_MEDICOS } from '../data/mockMedicos';
 
 // URL Base conectada a AWS API Gateway
-const API_URL = "https://190iqie7ue.execute-api.us-east-1.amazonaws.com";
+const API_URL = "http://54.234.224.188:8081";
 const USE_MOCK = false; // Cambiar a false para conectar con MS-Médicos
 
 // Simulación de persistencia local en memoria para los mocks
